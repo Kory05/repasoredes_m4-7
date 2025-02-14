@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen de Redes - Parte 2</title>
+    <style>
+        body {
+            background-color: #FFF9C4; /* Amarillo pastel */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .question {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #0288D1;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0277BD;
+        }
+        .container_volver {
+            background-color: white;
+            padding: 10px;
+            display: inline-block;
+            border-radius: 10px;
+        }
+        .link_volver {
+            display: block;
+            margin: 5px;
+            font-size: 20px;
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .link_volver:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<script>
+    function checkAnswer(event, questionId, correctAnswers, explanation) {
+        event.preventDefault();
+        let selectedElements = document.querySelectorAll(`input[name="${questionId}"]:checked`);
+        let selectedValues = Array.from(selectedElements).map(el => el.value);
+        let resultElement = document.getElementById(`result-${questionId}`);
+        
+        if (selectedValues.length === 0) {
+            resultElement.textContent = "Por favor, selecciona una respuesta.";
+            resultElement.style.color = "red";
+            return false;
+        }
+        
+        let isCorrect = selectedValues.sort().toString() === correctAnswers.sort().toString();
+        if (isCorrect) {
+            resultElement.innerHTML = "<span style='color: green;'>¡Correcto!</span> " + explanation;
+        } else {
+            resultElement.innerHTML = "<span style='color: red;'>Incorrecto.</span> La respuesta correcta es: " + correctAnswers.join(", ") + ". " + explanation;
+        }
+        return false;
+    }
+</script>
+<h1>Módulos 4 – 7: Examen de conceptos Ethernet - Parte 2</h1><div class="container_volver"><a href="index.html" class="link_volver">Volver al inicio</a></div>
+<p></p>
+<div class="question">
+    <p>11. Un equipo de redes compara las topologías físicas WAN para la conexión de sitios remotos al edificio de una oficina central. ¿Qué topología proporciona alta disponibilidad y conecta algunos sitios remotos, pero no todos?</p>
+    <form onsubmit="return checkAnswer(event, 'q11', ['a'], 'Las topologías de malla parcial proporcionan alta disponibilidad porque interconectan varios sitios remotos sin necesidad de conectar todos los sitios.')">
+        <label><input type="radio" name="q11" value="a"> Malla parcial</label><br>
+        <label><input type="radio" name="q11" value="b"> Hub-and-spoke</label><br>
+        <label><input type="radio" name="q11" value="c"> Malla</label><br>
+        <label><input type="radio" name="q11" value="d"> Punto a punto</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: Las topologías de malla parcial
+         proporcionan alta disponibilidad porque
+          interconectan varios sitios remotos, pero no
+           requieren una conexión entre todos los 
+           sitios remotos. Las topologías de malla 
+           requieren enlaces punto a punto, donde 
+           cada sistema esté conectado a todos los
+            demás sistemas. Una topología punto a punto 
+            se da cuando cada dispositivo está conectado 
+            a un dispositivo. Las topologías hub-and-spoke 
+            utilizan un dispositivo central en una topología
+             en estrella que se conecta a otros
+              dispositivos punto a punto.</b></p>
+    <p class="result" id="result-q11"></p>
+</div>
+
+<div class="question">
+    <p>12. ¿Qué dos campos o características examina Ethernet para determinar si una trama recibida es válida?</p>
+    <form onsubmit="return checkAnswer(event, 'q12', ['b', 'c'], 'Ethernet descarta tramas si son menores de 64 bytes o si el valor FCS calculado no coincide con el recibido.')">
+        <label><input type="checkbox" name="q12" value="a"> Dirección MAC de origen</label><br>
+        <label><input type="checkbox" name="q12" value="b"> Secuencia de verificación de trama</label><br>
+        <label><input type="checkbox" name="q12" value="c"> Tamaño mínimo de trama</label><br>
+        <label><input type="checkbox" name="q12" value="d"> CEF</label><br>
+        <label><input type="checkbox" name="q12" value="e"> MDIX automático</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: Una trama Ethernet no se procesa y 
+        se descarta si es menor que el mínimo (64 bytes) o si el valor de la secuencia de comprobación de trama calculada (FCS) no coincide con el valor FCS recibido. Auto-MDIX (cruce automático de interfaz dependiente del medio) es tecnología de capa 1 que detecta los
+         tipos de cable directo o cruzado. La dirección MAC
+          de origen no se utiliza para determinar cómo se recibe 
+          la trama. CEF (Cisco Express Forwarding) es una tecnología 
+          utilizada para acelerar switching a nivel 3.</b></p>
+    <p class="result" id="result-q12"></p>
+</div>
+
+<div class="question">
+    <p>13. ¿Qué tipo de comunicación de medios no requiere arbitraje en la capa de enlace de datos?</p>
+    <form onsubmit="return checkAnswer(event, 'q13', ['c'], 'La comunicación dúplex completo permite la transmisión y recepción simultánea sin arbitraje.')">
+        <label><input type="radio" name="q13" value="a"> Acceso controlado</label><br>
+        <label><input type="radio" name="q13" value="b"> Semidúplex</label><br>
+        <label><input type="radio" name="q13" value="c"> Dúplex completo</label><br>
+        <label><input type="radio" name="q13" value="d"> Determinante</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: Comunicación half-duplex: los dos
+         dispositivos pueden transmitir y recibir en los
+          medios pero no pueden hacerlo simultáneamente. 
+          Comunicación full-dúplex: los dos dispositivos pueden
+           transmitir y recibir en los medios al mismo tiempo. 
+           La comunicación semidúplex suele basarse en la contencion, 
+           mientras que el acceso controlado (determinista) se aplica
+            en tecnologías donde los dispositivos 
+        se turnan para acceder al medio.</b></p>
+    <p class="result" id="result-q13"></p>
+</div>
+
+<div class="question">
+    <p>14. ¿Cuál de las siguientes es una característica de la subcapa LLC?</p>
+    <form onsubmit="return checkAnswer(event, 'q14', ['c'], 'El LLC coloca información en la trama para permitir que varios protocolos de capa 3 compartan la interfaz de red.')">
+        <label><input type="radio" name="q14" value="a"> Proporciona la delimitación de datos según los requisitos de señalización física del medio.</label><br>
+        <label><input type="radio" name="q14" value="b"> Proporciona el direccionamiento lógico requerido que identifica el dispositivo.</label><br>
+        <label><input type="radio" name="q14" value="c"> Coloca en la trama información que permite que varios protocolos de capa 3 utilicen la misma interfaz y los mismos medios de red.</label><br>
+        <label><input type="radio" name="q14" value="d"> Define los procesos de software que proporcionan servicios a la capa física.</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: El control de enlace lógico 
+        (LLC) define los procesos de software que 
+        proporcionan servicios a los protocolos de capa de red. 
+        El LLC coloca información en la trama e identifica qué
+         protocolo de capa de red se utiliza para ella. Esta información
+          permite que varios protocolos de capa 3, tales como IPv4 e IPv6,
+           utilicen
+         la misma interfaz y los mismos medios de red.</b></p>
+    <p class="result" id="result-q14"></p>
+</div>
+<div class="question">
+    <p>15. ¿Qué tres partes básicas son comunes a todos los tipos de trama admitidos por la capa de enlace de datos? (Escoja tres opciones).</p>
+    <form onsubmit="return checkAnswer(event, 'q15', ['a', 'e', 'f'], 'Cada trama de la capa de enlace de datos tiene un encabezado, datos y un tráiler.')">
+        <label><input type="checkbox" name="q15" value="a"> Data</label><br>
+        <label><input type="checkbox" name="q15" value="b"> MTU size</label><br>
+        <label><input type="checkbox" name="q15" value="c"> Type field</label><br>
+        <label><input type="checkbox" name="q15" value="d"> Valor CRC</label><br>
+        <label><input type="checkbox" name="q15" value="e"> Header</label><br>
+        <label><input type="checkbox" name="q15" value="f"> Trailer</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: La capa de enlace de datos implica
+         una comunicación de NIC a NIC dentro de la misma
+          red. Si bien existen muchos protocolos de capa de
+           enlace de datos diferentes que describen las tramas 
+           de la capa de enlace de datos, cada tipo de trama tiene
+            tres partes básicas:
+        Header
+        Data
+        Trailer
+    </b></p>
+    <p class="result" id="result-q15"></p>
+</div>
+<div class="question">
+    <p>16. ¿Cuál es la dirección MAC de destino de la trama de Ethernet al salir del servidor web si el destino final es la PC1?</p>
+    <figure>
+        <img src="16.jpg"/>
+    </figure>
+    <form onsubmit="return checkAnswer(event, 'q16', ['b'], 'Cuando la trama sale del servidor web, se entrega utilizando la dirección MAC del gateway predeterminado.')">
+        <label><input type="radio" name="q16" value="a"> 00-60-2F-3A-07-BB</label><br>
+        <label><input type="radio" name="q16" value="b"> 00-60-2F-3A-07-CC</label><br>
+        <label><input type="radio" name="q16" value="c"> 00-60-2F-3A-07-AA</label><br>
+        <label><input type="radio" name="q16" value="d"> 00-60-2F-3A-07-DD</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: La dirección MAC de destino
+         se utiliza para la entrega local de tramas de Ethernet. 
+         La dirección MAC (capa 2) cambia en cada segmento de red 
+         a lo largo de la ruta. Cuando la trama sale del servidor 
+         web, se entrega utilizando
+         la dirección MAC del gateway predeterminado.</b></p>
+    <p class="result" id="result-q16"></p>
+</div>
+
+<div class="question">
+    <p>17. Un switch de capa 2 se utiliza para conmutar las tramas entrantes desde un puerto 1000BASE-T 
+        a un puerto conectado a una red 100Base-T. ¿Qué método de almacenamiento en búfer de memoria sería el más adecuado para conmutar tramas entre puertos de diferentes velocidades?</p>
+    <form onsubmit="return checkAnswer(event, 'q17', ['d'], 'El almacenamiento en búfer de memoria compartida permite la transmisión de tramas más amplias y reduce la pérdida de tramas en redes asimétricas.')">
+        <label><input type="radio" name="q17" value="a"> Almacenamiento en búfer basado en puerto</label><br>
+        <label><input type="radio" name="q17" value="b"> Almacenamiento en búfer de caché de nivel 1</label><br>
+        <label><input type="radio" name="q17" value="c"> Almacenamiento en búfer de configuración fija</label><br>
+        <label><input type="radio" name="q17" value="d"> Almacenamiento en búfer de memoria compartida</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: Mediante el almacenamiento en búfer 
+        de memoria compartida, la cantidad de tramas almacenadas 
+        en el búfer solo se encuentra limitada por el tamaño del
+         búfer de memoria en su totalidad y no se limita al búfer 
+         de un solo puerto. Esto permite la transmisión de tramas más
+          amplias y que se descarte una menor cantidad de ellas. Esto 
+          es importante para la conmutación asimétrica, la cual se aplica 
+          a esta situación, donde las tramas se intercambian entre puertos
+           con distintas velocidades. Con el almacenamiento en búfer de
+            memoria basado en puerto, las tramas se almacenan en colas 
+            vinculadas a puertos de entrada y de salida específicos, lo
+             que permite que una única trama retrase la transmisión de 
+             todas las tramas en la memoria debido a un puerto de destino 
+             ocupado. La memoria caché de nivel 1 es la que se utiliza en 
+             las CPU. La configuración fija se refiere a la 
+        disposición de los puertos en el hardware del switch.</b></p>
+    <p class="result" id="result-q17"></p>
+</div>
+
+<div class="question">
+    <p>18. ¿Cuáles de los siguientes son dos ejemplos de switching por método de corte? (Elija dos opciones).</p>
+    <form onsubmit="return checkAnswer(event, 'q18', ['d', 'e'], 'El switching de envío rápido y el switching libre de fragmentos son variaciones del switching por método de corte.')">
+        <label><input type="checkbox" name="q18" value="a"> Switching de almacenamiento y envío</label><br>
+        <label><input type="checkbox" name="q18" value="b"> Switching CRC</label><br>
+        <label><input type="checkbox" name="q18" value="c"> Switching QOS</label><br>
+        <label><input type="checkbox" name="q18" value="d"> Switching de envío rápido</label><br>
+        <label><input type="checkbox" name="q18" value="e"> Switching libre de fragmentos</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: El switching de almacenamiento 
+        y envío acepta la trama completa y realiza una 
+        verificación de errores con la CRC antes de reenviarla.
+         A menudo, este método se requiere para el análisis de QOS. 
+         El método de envío rápido y el método libre de fragmentos son
+          variaciones del switching por método de corte, en el que el
+           switch solamente recibe parte de la trama 
+        antes de comenzar a reenviarla.</b></p>
+    <p class="result" id="result-q18"></p>
+</div>
+
+<div class="question">
+    <p>19. ¿En qué método de reenvío de tramas se recibe la trama completa y se realiza una comprobación de CRC antes de reenviarla?</p>
+    <form onsubmit="return checkAnswer(event, 'q19', ['b'], 'El switching de almacenamiento y envío verifica errores con la CRC antes de reenviar.')">
+        <label><input type="radio" name="q19" value="a"> Switching libre de fragmentos</label><br>
+        <label><input type="radio" name="q19" value="b"> Switching de almacenamiento y envío</label><br>
+        <label><input type="radio" name="q19" value="c"> Switching por método de corte</label><br>
+        <label><input type="radio" name="q19" value="d"> Switching de envío rápido</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: El switching de envío
+        rápido y el switching libre de fragmentos 
+        son variaciones del switching por método de
+         corte, que comienza a reenviar la trama 
+       antes de recibirla por completo.</b></p>
+    <p class="result" id="result-q19"></p>
+</div>
+
+<div class="question">
+    <p>20. ¿Cuál es el propósito del campo FCS en una trama?</p>
+    <form onsubmit="return checkAnswer(event, 'q20', ['c'], 'El campo FCS se usa para detectar errores en la transmisión y recepción de tramas.')">
+        <label><input type="radio" name="q20" value="a"> Verificar la dirección lógica del nodo emisor</label><br>
+        <label><input type="radio" name="q20" value="b"> Obtener la dirección MAC del nodo emisor</label><br>
+        <label><input type="radio" name="q20" value="c"> Determinar si ocurrieron errores durante la transmisión y recepción</label><br>
+        <label><input type="radio" name="q20" value="d"> Calcular el encabezado CRC para el campo de datos</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: En una trama, el campo
+         FCS se utiliza para detectar cualquier
+          error en la transmisión y la recepción 
+          de una trama. Esto se hace al comparar el valor
+           de CRC dentro de la trama con un valor de CRC computado
+            de la trama. 
+        Si los dos valores no coinciden, se descarta la trama.</b></p>
+    <p class="result" id="result-q20"></p>
+</div>
+<div class="container_volver"><a href="index.html" class="link_volver">Volver al inicio</a></div>
+</body>
+</html>

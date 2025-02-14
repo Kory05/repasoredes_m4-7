@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen de Redes - Parte 4</title>
+    <style>
+        body {
+            background-color: #D7CCC8; /* Marrón pastel */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .question {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #0288D1;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0277BD;
+        }
+        .container_volver {
+            background-color: white;
+            padding: 10px;
+            display: inline-block;
+            border-radius: 10px;
+        }
+        .link_volver {
+            display: block;
+            margin: 5px;
+            font-size: 20px;
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .link_volver:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<script>
+    function checkAnswer(event, questionId, correctAnswers, explanation) {
+        event.preventDefault();
+        let selectedElements = document.querySelectorAll(`input[name="${questionId}"]:checked`);
+        let selectedValues = Array.from(selectedElements).map(el => el.value);
+        let resultElement = document.getElementById(`result-${questionId}`);
+        
+        if (selectedValues.length === 0) {
+            resultElement.textContent = "Por favor, selecciona una respuesta.";
+            resultElement.style.color = "red";
+            return false;
+        }
+        
+        let isCorrect = selectedValues.sort().toString() === correctAnswers.sort().toString();
+        if (isCorrect) {
+            resultElement.innerHTML = "<span style='color: green;'>¡Correcto!</span> " + explanation;
+        } else {
+            resultElement.innerHTML = "<span style='color: red;'>Incorrecto.</span> La respuesta correcta es: " + correctAnswers.join(", ") + ". " + explanation;
+        }
+        return false;
+    }
+</script>
+<h1>Módulos 4 – 7: Examen de conceptos Ethernet - Parte 4</h1><div class="container_volver"><a href="index.html" class="link_volver">Volver al inicio</a></div>
+<p></p>
+<div class="question">
+    <p>31. ¿Qué hace que la fibra sea preferible al cableado de cobre para la interconexión de edificios? (Escoja tres opciones).</p>
+    <form onsubmit="return checkAnswer(event, 'q31', ['a', 'b', 'e'], 'La fibra óptica ofrece mayor ancho de banda, alcanza mayores distancias y es inmune a EMI/RFI.')">
+        <label><input type="checkbox" name="q31" value="a"> Mayor potencial de ancho de banda</label><br>
+        <label><input type="checkbox" name="q31" value="b"> Mayores distancias por cable</label><br>
+        <label><input type="checkbox" name="q31" value="c"> Fácil de terminar</label><br>
+        <label><input type="checkbox" name="q31" value="d"> Conexiones duraderas</label><br>
+        <label><input type="checkbox" name="q31" value="e"> Susceptibilidad limitada a EMI/RFI</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: Transmite de datos a través de distancias más extensas
+         y a anchos de banda mayores que cualquier otro medio de red. A diferencia
+          de los cables de cobre, el cable de fibra óptica puede transmitir señales
+           con menos atenuación y es totalmente
+         inmune a las EMI y RFI.</b></p>
+    <p class="result" id="result-q31"></p>
+</div>
+
+<div class="question">
+    <p>32. ¿Qué término de capa física OSI describe la medida de la transferencia de bits a través de un medio durante un período de tiempo determinado?</p>
+    <form onsubmit="return checkAnswer(event, 'q32', ['d'], 'El rendimiento mide la cantidad de bits transferidos en un tiempo determinado.')">
+        <label><input type="radio" name="q32" value="a"> Ancho de banda</label><br>
+        <label><input type="radio" name="q32" value="b"> Capacidad de transferencia útil</label><br>
+        <label><input type="radio" name="q32" value="c"> Latencia</label><br>
+        <label><input type="radio" name="q32" value="d"> Rendimiento</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b></b></p>
+    <p class="result" id="result-q32"></p>
+</div>
+
+<div class="question">
+    <p>33. ¿Qué dos funciones se realizan en la subcapa LLC de la capa de enlace de datos OSI? (Escoja dos opciones).</p>
+    <form onsubmit="return checkAnswer(event, 'q33', ['a', 'e'], 'La subcapa LLC permite que IPv4 e IPv6 utilicen la misma interfaz, agrega control de capa 2 y coloca información sobre el protocolo de red.')">
+        <label><input type="checkbox" name="q33" value="a"> Permite que IPv4 e IPv6 utilicen la misma interfaz de red y medios</label><br>
+        <label><input type="checkbox" name="q33" value="b"> Proporciona sincronización entre nodos de origen y de destino</label><br>
+        <label><input type="checkbox" name="q33" value="c"> Integra varias tecnologías físicas</label><br>
+        <label><input type="checkbox" name="q33" value="d"> Implementa un tráiler para detectar errores de transmisión</label><br>
+        <label><input type="checkbox" name="q33" value="e"> Agrega información de control de capa 2 a los datos de protocolo de red</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Hola chavales, Cómo llevais el estudio? Espero que bien, 
+        esta captura que os dejo a continuación es porque se ve que la pregunta
+         33 tiene como otro caso y tiene diferentes respuestas, chatGPT no me lo 
+         ha adjuntado y
+         me ha dado mega pereza integrarlo yo, así que lo pongo en captura</b></p>
+         <figure>
+            <img src="33.jpg"/>
+         </figure>
+    <p class="result" id="result-q33"></p>
+</div>
+<div class="question">
+    <p>34. ¿Qué acción se produciría si un switch recibe una trama y tiene
+         la dirección MAC de origen en la tabla MAC?</p>
+    <form onsubmit="return checkAnswer(event, 'q34', ['d'], 'El switch actualiza el temporizador en esa entrada para mantener la dirección en la tabla MAC.')">
+        <label><input type="radio" name="q34" value="a"> Comparte la entrada de la tabla de direcciones MAC con cualquier switch conectado</label><br>
+        <label><input type="radio" name="q34" value="b"> Envía la trama a un router conectado porque la dirección MAC de destino no es local</label><br>
+        <label><input type="radio" name="q34" value="c"> No reenvía la trama</label><br>
+        <label><input type="radio" name="q34" value="d"> El switch actualiza el temporizador en esa entrada</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b></b></p>
+    <p class="result" id="result-q34"></p>
+</div>
+
+<div class="question">
+    <p>35. ¿Qué acción se produciría si un host recibe un marco 
+        con una dirección MAC de destino que no reconoce?</p>
+    <form onsubmit="return checkAnswer(event, 'q35', ['a'], 'El host descarta la trama si la dirección MAC de destino no coincide con ninguna en su tabla de direcciones.')">
+        <label><input type="radio" name="q35" value="a"> El host descartará la trama.</label><br>
+        <label><input type="radio" name="q35" value="b"> El host reenvía la trama a todos los demás hosts.</label><br>
+        <label><input type="radio" name="q35" value="c"> El host reenvía la trama al router.</label><br>
+        <label><input type="radio" name="q35" value="d"> El host envía la trama al switch para actualizar la tabla de direcciones MAC.</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b></b></p>
+    <p class="result" id="result-q35"></p>
+</div>
+<div class="question">
+    <p>36. Un administrador de redes mide la transferencia de bits a 
+        través de la red troncal de la compañía para una aplicación de base
+         de datos de misión crítica. El administrador advierte que el rendimiento 
+         de la red está por debajo del ancho de banda esperado. ¿Cuáles son los tres
+          factores que podrían afectar el rendimiento? (Elija tres opciones).</p>
+    <form onsubmit="return checkAnswer(event, 'q36', ['a', 'c', 'd'], 'El rendimiento de la red se ve afectado por la cantidad y tipo de tráfico, así como la latencia.')">
+        <label><input type="checkbox" name="q36" value="a"> La cantidad de tráfico que cruza la red en el momento</label><br>
+        <label><input type="checkbox" name="q36" value="b"> La sofisticación del método de encapsulamiento aplicado a los datos</label><br>
+        <label><input type="checkbox" name="q36" value="c"> El tipo de tráfico que cruza la red</label><br>
+        <label><input type="checkbox" name="q36" value="d"> La latencia generada por la cantidad de dispositivos de red que atraviesan los datos</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: En general, el rendimiento no coincide con el ancho de banda especificado de los enlaces físicos debido a varios factores. Estos factores incluyen la cantidad de tráfico, el tipo de tráfico y la latencia creada 
+        por los dispositivos de red que los datos deben atravesar.</b></p>
+    <p class="result" id="result-q36"></p>
+</div>
+
+<div class="question">
+    <p>37. ¿Cuál es la función principal de la capa física en la transmisión de datos en la red?</p>
+    <form onsubmit="return checkAnswer(event, 'q37', ['a'], 'La capa física crea señales para transportar los bits a través de la red.')">
+        <label><input type="radio" name="q37" value="a"> Crear las señales que representan los bits en cada trama en el medio</label><br>
+        <label><input type="radio" name="q37" value="b"> Controlar el acceso a los datos a los medios</label><br>
+        <label><input type="radio" name="q37" value="c"> Proporcionar direccionamiento físico a los dispositivos</label><br>
+        <label><input type="radio" name="q37" value="d"> Determinar las mejores rutas para los paquetes a través de la red</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: La capa física de OSI proporciona los
+         medios de transporte de los bits que conforman una 
+         trama a través de los medios de red. Esta capa acepta una 
+         trama completa de la capa de enlace de datos y la codifica en una serie de 
+        señales para poder transmitir al medio local.</b></p>
+    <p class="result" id="result-q37"></p>
+</div>
+
+<div class="question">
+    <p>38. ¿Cuál de estas afirmaciones describe una topología en estrella extendida?</p>
+    <form onsubmit="return checkAnswer(event, 'q38', ['c'], 'En una topología en estrella extendida, los dispositivos intermedios centrales interconectan otras topologías en estrella.')">
+        <label><input type="radio" name="q38" value="a"> Todos los dispositivos intermedios y terminales se conectan entre sí en cadena</label><br>
+        <label><input type="radio" name="q38" value="b"> Las terminales se conectan entre sí por medio de un bus que se conecta a un dispositivo intermediario central</label><br>
+        <label><input type="radio" name="q38" value="c"> Las terminales se conectan a un dispositivo intermediario central que se conecta a otros dispositivos intermediarios centrales</label><br>
+        <label><input type="radio" name="q38" value="d">Cada terminal se conecta a su vecino respectivo por medio de un dispositivo intermediario. </label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: En una topología en estrella extendida, los dispositivos intermediarios centrales interconectan 
+        otras topologías en estrella.</b></p>
+    <p class="result" id="result-q38"></p>
+</div>
+
+<div class="question">
+    <p>39. ¿Cuáles son las tres formas en que se utiliza el control de acceso a medios en redes? (Escoja tres opciones).</p>
+    <form onsubmit="return checkAnswer(event, 'q39', ['a', 'd', 'e'], 'Las redes utilizan CSMA/CD para acceso a medios y controlan cómo se colocan las tramas en la red.')">
+        <label><input type="checkbox" name="q39" value="a"> El control de acceso a medios proporciona la colocación de tramas de datos en el medio</label><br>
+        <label><input type="checkbox" name="q39" value="b"> El acceso basado en contención también se conoce como determinista</label><br>
+        <label><input type="checkbox" name="q39" value="c"> Las redes con acceso controlado han reducido el rendimiento debido a colisiones de datos</label><br>
+        <label><input type="checkbox" name="q39" value="d"> Ethernet utiliza CSMA/CD</label><br>
+        <label><input type="checkbox" name="q39" value="e"> Los protocolos en la capa de enlace de datos definen las reglas de acceso
+             a los diferentes medios.</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: Las redes Ethernet cableadas utilizan 
+        CSMA/CD para controlar el acceso a medios. Las redes
+         inalámbricas IEEE 802.11 utilizan CSMA/CA, un método
+          similar. El control de acceso a medios define la forma
+           en que los marcos de datos se colocan en los medios. El método 
+           de acceso controlado es determinista, no un acceso basado en contencion
+            a las redes. Dado que cada dispositivo tiene su propio tiempo para usar 
+            el medio, las redes de acceso controlado como 
+        Token Ring heredado no tienen colisiones.</b></p>
+    <p class="result" id="result-q39"></p>
+</div>
+<div class="question">
+    <p>40. Durante el proceso de encapsulamiento, ¿qué ocurre en la capa de enlace de datos para una PC conectada a una red Ethernet?</p>
+    <form onsubmit="return checkAnswer(event, 'q40', ['b'], 'La trama de Ethernet incluye las direcciones físicas de origen y destino.')">
+        <label><input type="radio" name="q40" value="a"> Se agrega la dirección lógica.</label><br>
+        <label><input type="radio" name="q40" value="b"> Se agrega la dirección física.</label><br>
+        <label><input type="radio" name="q40" value="c"> Se agrega una dirección IP.</label><br>
+        <label><input type="radio" name="q40" value="d"> Se agrega el número de puerto del proceso.</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: La trama de Ethernet incluye las direcciones físicas
+         de origen y de destino. El tráiler incluye un valor CRC en el campo 
+         de secuencia de verificación de trama para permitir que el dispositivo
+          receptor determine si la trama
+         se modificó (tiene errores) durante la transmisión.</b></p>
+    <p class="result" id="result-q40"></p>
+</div>
+<div class="container_volver"><a href="index.html" class="link_volver">Volver al inicio</a></div>
+</body>
+</html>

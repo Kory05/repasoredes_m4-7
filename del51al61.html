@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen de Redes - Parte 6</title>
+    <style>
+        body {
+            background-color: #D8BFD8; /* Morado pastel */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .question {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #0288D1;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0277BD;
+        }
+        .small-image {
+            max-width: 300px; /* Ajusta el tamaño a 300px de ancho */
+            height: auto; /* Mantiene la proporción de la imagen */
+            border-radius: 10px; /* Opcional: bordes redondeados */
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Opcional: sombra para destacar */
+        }
+        .container_volver {
+            background-color: white;
+            padding: 10px;
+            display: inline-block;
+            border-radius: 10px;
+        }
+        .link_volver {
+            display: block;
+            margin: 5px;
+            font-size: 20px;
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .link_volver:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<script>
+    function checkAnswer(event, questionId, correctAnswers, explanation) {
+        event.preventDefault();
+        let selectedElements = document.querySelectorAll(`input[name="${questionId}"]:checked`);
+        let selectedValues = Array.from(selectedElements).map(el => el.value);
+        let resultElement = document.getElementById(`result-${questionId}`);
+        
+        if (selectedValues.length === 0) {
+            resultElement.textContent = "Por favor, selecciona una respuesta.";
+            resultElement.style.color = "red";
+            return false;
+        }
+        
+        let isCorrect = selectedValues.sort().toString() === correctAnswers.sort().toString();
+        if (isCorrect) {
+            resultElement.innerHTML = "<span style='color: green;'>¡Correcto!</span> " + explanation;
+        } else {
+            resultElement.innerHTML = "<span style='color: red;'>Incorrecto.</span> La respuesta correcta es: " + correctAnswers.join(", ") + ". " + explanation;
+        }
+        return false;
+    }
+</script>
+<h1>Módulos 4 – 7: Examen de conceptos Ethernet - Parte 6</h1><div class="container_volver"><a href="index.html" class="link_volver">Volver al inicio</a></div>
+<p></p>
+<div class="question">
+    <p>51. ¿Qué término de capa física OSI describe el medio físico que utiliza la propagación de la luz?</p>
+    <form onsubmit="return checkAnswer(event, 'q51', ['d'], 'El cable de fibra óptica utiliza la luz para la transmisión de datos a largas distancias sin interferencia electromagnética.')">
+        <label><input type="radio" name="q51" value="a"> Rendimiento real</label><br>
+        <label><input type="radio" name="q51" value="b"> Latencia</label><br>
+        <label><input type="radio" name="q51" value="c"> Throughput</label><br>
+        <label><input type="radio" name="q51" value="d"> Cable de fibra óptica</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p class="result" id="result-q51"></p>
+</div>
+
+<div class="question">
+    <p>52. ¿Qué dos funciones se realizan en la subcapa LLC de la capa de enlace de datos OSI? (Escoja dos opciones)</p>
+    <form onsubmit="return checkAnswer(event, 'q52', ['c', 'd'], 'La subcapa LLC permite que IPv4 e IPv6 utilicen la misma interfaz de red y agrega información de control de capa 2.')">
+        <label><input type="checkbox" name="q52" value="a"> Implementa un tráiler para detectar errores de transmisión.</label><br>
+        <label><input type="checkbox" name="q52" value="b"> Proporciona direccionamiento de capa de enlace de datos.</label><br>
+        <label><input type="checkbox" name="q52" value="c"> Permite que IPv4 e IPv6 utilicen la misma interfaz de red y medios.</label><br>
+        <label><input type="checkbox" name="q52" value="d"> Agrega información de control de capa 2 a los datos de protocolo de red.</label><br>
+        <label><input type="checkbox" name="q52" value="e"> Proporciona sincronización entre nodos de origen y de destino.</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p class="result" id="result-q52"></p>
+</div>
+<div class="question">
+    <p>53. ¿Qué dos funciones se realizan en la subcapa MAC de la capa de enlace de datos OSI? (Escoja dos opciones)</p>
+    <form onsubmit="return checkAnswer(event, 'q53', ['b', 'c'], 'La subcapa MAC proporciona sincronización entre nodos de origen y destino e implementa un tráiler para detectar errores de transmisión.')">
+        <label><input type="checkbox" name="q53" value="a"> Coloca en la trama información que identifica qué protocolo de capa de red se utiliza para la trama.</label><br>
+        <label><input type="checkbox" name="q53" value="b"> Proporciona sincronización entre nodos de origen y destino.</label><br>
+        <label><input type="checkbox" name="q53" value="c"> Implementa un tráiler para detectar errores de transmisión.</label><br>
+        <label><input type="checkbox" name="q53" value="d"> Permite que IPv4 e IPv6 utilicen la misma interfaz de red y medios.</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>OTRA VEZ LA MIERDA ESTA DE LOS CASOS...</b></p>
+    <figure>
+        <img src="53.jpg"/>
+    </figure>
+    <p class="result" id="result-q53"></p>
+</div>
+
+<div class="question">
+    <p>54. ¿Qué acción se produciría si un switch recibe una trama con la dirección MAC de destino FF:FF:FF:FF:FF:FF?</p>
+    <form onsubmit="return checkAnswer(event, 'q54', ['a'], 'Cuando un switch recibe una trama de broadcast con la dirección MAC FF:FF:FF:FF:FF:FF, la reenvía a todos los puertos excepto el puerto de entrada.')">
+        <label><input type="radio" name="q54" value="a"> El switch lo reenviará a todos los puertos excepto el puerto de entrada.</label><br>
+        <label><input type="radio" name="q54" value="b"> El switch envía la trama a un router conectado porque la dirección MAC de destino no es local.</label><br>
+        <label><input type="radio" name="q54" value="c"> El switch actualiza el temporizador en esa entrada.</label><br>
+        <label><input type="radio" name="q54" value="d"> El switch no reenvía la trama.</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>OTRA VEZ LA MIERDA ESTA DE LOS CASOS...</b></p>
+    <figure>
+        <img src="54.jpg"/>
+    </figure>
+    <p class="result" id="result-q54"></p>
+</div>
+
+<div class="question">
+    <p>55. ¿Qué declaración es verdadera sobre el método de acceso CSMA/CD que se utiliza en Ethernet?</p>
+    <form onsubmit="return checkAnswer(event, 'q55', ['a'], 'CSMA/CD requiere que todos los dispositivos escuchen antes de transmitir para evitar colisiones.')">
+        <label><input type="radio" name="q55" value="a"> Todos los dispositivos de red deben escuchar antes de transmitir.</label><br>
+        <label><input type="radio" name="q55" value="b"> Cuando un dispositivo escucha una señal portadora y transmite, no se puede producir una colisión.</label><br>
+        <label><input type="radio" name="q55" value="c"> Los dispositivos involucrados en una colisión tienen prioridad para transmitir después del período de retroceso.</label><br>
+        <label><input type="radio" name="q55" value="d"> Una señal de interferencia hace que solo los dispositivos que causaron la colisión ejecuten un algoritmo de retroceso.</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: La LAN Ethernet de topología de bus heredada 
+        utiliza CSMA/CD como protocolo de control de acceso a medios de red.
+        Funciona detectando una colisión en el medio y retrocediendo (después 
+        de transmitir una señal de atasco) según sea necesario. Cuando un host desea
+         transmitir un fotograma, escucha en el medio para comprobar si el medio está 
+         ocupado. Después de que detecta que nadie más está transmitiendo, el host comienza
+          a transmitir el fotograma, también monitorea el nivel actual para detectar una 
+          colisión. Si detecta una colisión, transmite una señal especial de atasco para que 
+          todos los demás hosts puedan saber que hubo una colisión. El otro host recibirá 
+          esta señal de atasco y dejará de transmitir. Después de esto, ambos hosts entran 
+          en una fase de
+         retroceso exponencial y reintentan la transmisión.</b></p>
+    <p class="result" id="result-q55"></p>
+</div>
+<div class="question">
+    <p>56. ¿Qué término de capa física OSI describe la capacidad a la que un medio puede transportar datos?</p>
+    <form onsubmit="return checkAnswer(event, 'q56', ['a'], 'El ancho de banda representa la capacidad de transporte de datos de un medio de transmisión en la capa física OSI.')">
+        <label><input type="radio" name="q56" value="a"> Ancho de banda</label><br>
+        <label><input type="radio" name="q56" value="b"> aire</label><br>
+        <label><input type="radio" name="q56" value="c"> EIA/TIA</label><br>
+        <label><input type="radio" name="q56" value="d"> IEEE</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p class="result" id="result-q56"></p>
+</div>
+
+<div class="question">
+    <p>57. ¿Qué término de capa física OSI describe la medida de datos utilizables transferidos durante un período determinado?</p>
+    <form onsubmit="return checkAnswer(event, 'q57', ['c'], 'Goodput mide la cantidad de datos utilizables transferidos en un tiempo determinado, excluyendo los datos de control y retransmisiones.')">
+        <label><input type="radio" name="q57" value="a"> aire</label><br>
+        <label><input type="radio" name="q57" value="b"> Cable de fibra óptica</label><br>
+        <label><input type="radio" name="q57" value="c"> goodput</label><br>
+        <label><input type="radio" name="q57" value="d"> Cable de cobre</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p class="result" id="result-q57"></p>
+</div>
+
+<div class="question">
+    <p>58. ¿Qué término de capa física OSI describe la cantidad de tiempo, incluidos los retrasos, para que los datos viajen de un punto a otro?</p>
+    <form onsubmit="return checkAnswer(event, 'q58', ['a'], 'La latencia es el tiempo total que tarda un paquete en viajar de un punto a otro, incluidos los retrasos de procesamiento y transmisión.')">
+        <label><input type="radio" name="q58" value="a"> latencia</label><br>
+        <label><input type="radio" name="q58" value="b"> aire</label><br>
+        <label><input type="radio" name="q58" value="c"> Cable de fibra óptica</label><br>
+        <label><input type="radio" name="q58" value="d"> Cable de cobre</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p class="result" id="result-q58"></p>
+</div>
+<div class="question">
+    <p>59. ¿Qué acción se produciría si un host recibe una trama con una dirección MAC de destino que no reconoce?</p>
+    <form onsubmit="return checkAnswer(event, 'q59', ['b'], 'Si un host recibe una trama con una dirección MAC de destino que no reconoce, simplemente la descartará.')">
+        <label><input type="radio" name="q59" value="a"> El host responde al switch con su propia dirección IP.</label><br>
+        <label><input type="radio" name="q59" value="b"> El host descartará la trama.</label><br>
+        <label><input type="radio" name="q59" value="c"> El host reenviará la trama a todos los demás hosts.</label><br>
+        <label><input type="radio" name="q59" value="d"> El host devuelve la trama al switch.</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p class="result" id="result-q59"></p>
+</div>
+
+<div class="question">
+    <p>60. ¿Qué término de capa física OSI describe el medio físico para las transmisiones de microondas?</p>
+    <form onsubmit="return checkAnswer(event, 'q60', ['b'], 'Las microondas se transmiten a través del aire como medio de propagación de la señal.')">
+        <label><input type="radio" name="q60" value="a"> Rendimiento real</label><br>
+        <label><input type="radio" name="q60" value="b"> Aire</label><br>
+        <label><input type="radio" name="q60" value="c"> Throughput</label><br>
+        <label><input type="radio" name="q60" value="d"> Latencia</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p class="result" id="result-q60"></p>
+</div>
+
+<div class="question">
+    <p>61. ¿Qué término de capa física OSI describe el medio físico que utiliza pulsos eléctricos?</p>
+    <form onsubmit="return checkAnswer(event, 'q61', ['a'], 'El cable de cobre transmite señales mediante pulsos eléctricos en la capa física de OSI.')">
+        <label><input type="radio" name="q61" value="a"> Cable de cobre</label><br>
+        <label><input type="radio" name="q61" value="b"> aire</label><br>
+        <label><input type="radio" name="q61" value="c"> Cable de fibra óptica</label><br>
+        <label><input type="radio" name="q61" value="d"> goodput</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p class="result" id="result-q61"></p>
+</div>
+<div class="container_volver"><a href="index.html" class="link_volver">Volver al inicio</a></div>
+</body>
+</html>

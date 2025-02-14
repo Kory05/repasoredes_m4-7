@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen de Redes - Parte 5</title>
+    <style>
+        body {
+            background-color: #E0E0E0; /* Gris pastel */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .question {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #0288D1;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0277BD;
+        }
+        .container_volver {
+            background-color: white;
+            padding: 10px;
+            display: inline-block;
+            border-radius: 10px;
+        }
+        .link_volver {
+            display: block;
+            margin: 5px;
+            font-size: 20px;
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .link_volver:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<script>
+    function checkAnswer(event, questionId, correctAnswers, explanation) {
+        event.preventDefault();
+        let selectedElements = document.querySelectorAll(`input[name="${questionId}"]:checked`);
+        let selectedValues = Array.from(selectedElements).map(el => el.value);
+        let resultElement = document.getElementById(`result-${questionId}`);
+        
+        if (selectedValues.length === 0) {
+            resultElement.textContent = "Por favor, selecciona una respuesta.";
+            resultElement.style.color = "red";
+            return false;
+        }
+        
+        let isCorrect = selectedValues.sort().toString() === correctAnswers.sort().toString();
+        if (isCorrect) {
+            resultElement.innerHTML = "<span style='color: green;'>¡Correcto!</span> " + explanation;
+        } else {
+            resultElement.innerHTML = "<span style='color: red;'>Incorrecto.</span> La respuesta correcta es: " + correctAnswers.join(", ") + ". " + explanation;
+        }
+        return false;
+    }
+</script>
+<h1>Módulos 4 – 7: Examen de conceptos Ethernet - Parte 5</h1><div class="container_volver"><a href="index.html" class="link_volver">Volver al inicio</a></div>
+<p></p>
+<div class="question">
+    <p>41. ¿Qué tres elementos están contenidos en un encabezado Ethernet y un tráiler? (Escoja tres opciones).</p>
+    <form onsubmit="return checkAnswer(event, 'q41', ['a', 'b', 'd'], 'Los encabezados de capa 2 contienen direcciones MAC de origen y destino, y detección de errores.')">
+        <label><input type="checkbox" name="q41" value="a"> Dirección MAC de destino</label><br>
+        <label><input type="checkbox" name="q41" value="b"> Información de comprobación de errores</label><br>
+        <label><input type="checkbox" name="q41" value="c"> Dirección IP de origen</label><br>
+        <label><input type="checkbox" name="q41" value="d"> Dirección MAC de origen</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: Los encabezados de capa 2 contienen lo siguiente:
+        Indicadores de inicio y terminación de trama que identifican los límites de inicio y terminación de la trama.
+        Direccionamiento: para redes Ethernet, esta parte del encabezado contiene direcciones MAC de origen y destino
+        Escriba el campo para indicar qué protocolo de capa 3 se está utilizando
+        Detección de errores para determinar si la trama llegó sin error</b></p>
+    <p class="result" id="result-q41"></p>
+</div>
+
+<div class="question">
+    <p>42. ¿Cuál de las siguientes es la característica MDIX automática en un switch?</p>
+    <form onsubmit="return checkAnswer(event, 'q42', ['d'], 'La función de MDIX automática permite que un switch utilice un cable cruzado o directo de Ethernet.')">
+        <label><input type="radio" name="q42" value="a"> La capacidad de activar o desactivar una interfaz si se detecta una conexión activa</label><br>
+        <label><input type="radio" name="q42" value="b"> La configuración automática de una interfaz para 10/100/1000 Mb/s</label><br>
+        <label><input type="radio" name="q42" value="c"> La configuración automática de full-dúplex</label><br>
+        <label><input type="radio" name="q42" value="d"> La configuración automática de una interfaz para una conexión por cable cruzado o directo de Ethernet</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: La función de MDIX automática permite que
+         un switch utilice un cable cruzado o directo de Ethernet para
+          conectarse a un dispositivo, independientemente del dispositivo que
+         se encuentre en el otro extremo de la conexión.</b></p>
+    <p class="result" id="result-q42"></p>
+</div>
+
+<div class="question">
+    <p>43. ¿Qué método de switching tiene el nivel de latencia más bajo?</p>
+    <form onsubmit="return checkAnswer(event, 'q43', ['b'], 'El switching de envío rápido tiene la latencia más baja porque reenvía la trama cuando lee la dirección MAC de destino.')">
+        <label><input type="radio" name="q43" value="a"> Libre de fragmentos</label><br>
+        <label><input type="radio" name="q43" value="b"> Envío rápido</label><br>
+        <label><input type="radio" name="q43" value="c"> Almacenamiento y envío</label><br>
+        <label><input type="radio" name="q43" value="d"> Método de corte</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: El switching de envío rápido comienza a reenviar la
+         trama cuando lee la dirección MAC de destino, lo que tiene como 
+         resultado la latencia más baja. El método libre de fragmentos lee los
+          primeros 64 bytes antes del reenvío. El método de almacenamiento de envío 
+          tiene la latencia más alta porque lee la trama completa antes de comenzar a 
+          reenviarla. Los métodos de envío rápido y libre
+         de fragmentos son tipos de switching por método de corte.</b></p>
+    <p class="result" id="result-q43"></p>
+</div>
+
+<div class="question">
+    <p>44. Cuando se usa el método de switching de almacenamiento y envío, ¿qué parte de la trama de Ethernet se usa para realizar una verificación de errores?</p>
+    <form onsubmit="return checkAnswer(event, 'q44', ['b'], 'El CRC en el tráiler se usa para determinar si la trama se modificó durante el tránsito.')">
+        <label><input type="radio" name="q44" value="a"> Dirección MAC de destino en el encabezado</label><br>
+        <label><input type="radio" name="q44" value="b"> CRC en el tráiler</label><br>
+        <label><input type="radio" name="q44" value="c"> Tipo de protocolo en el encabezado</label><br>
+        <label><input type="radio" name="q44" value="d"> Dirección MAC de origen en el encabezado</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: La parte de comprobación cíclica de redundancia (CRC)
+         del tráiler se usa para determinar si la trama se modificó durante 
+         el tránsito. Si se verifica la integridad de la trama, esta se reenvía. Si 
+         la integridad de la trama 
+        no se puede verificar, la trama se descarta.</b></p>
+    <p class="result" id="result-q44"></p>
+</div>
+
+<div class="question">
+    <p>45. ¿Cuál de las siguientes es una ventaja de utilizar el switching por método de corte en lugar del switching por almacenamiento y envío?</p>
+    <form onsubmit="return checkAnswer(event, 'q45', ['d'], 'El switching por método de corte brinda menor latencia en redes de alto rendimiento.')">
+        <label><input type="radio" name="q45" value="a"> Mayor flexibilidad en velocidades de Ethernet</label><br>
+        <label><input type="radio" name="q45" value="b"> Mejor uso del ancho de banda eliminando tramas inválidas</label><br>
+        <label><input type="radio" name="q45" value="c"> Toma decisiones de envío rápido basadas en MAC de origen</label><br>
+        <label><input type="radio" name="q45" value="d"> Tiene una latencia más baja, adecuada para aplicaciones informáticas de alto rendimiento</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: El switching por método de corte brinda un 
+        switching de menor latencia para las tecnologías informáticas
+         de alto rendimiento (HPC). El switching por método de corte 
+         permite que más tramas no válidas crucen la red en comparación 
+         con el switching por almacenamiento y envío. El switching por método
+          de corte puede tomar una decisión de reenvío tan pronto como busque la
+           dirección MAC
+         de destino de la trama.</b></p>
+    <p class="result" id="result-q45"></p>
+</div>
+<div class="question">
+    <p>46.  Una la situación con el uso adecuado de los medios de red.</p>
+   <figure>
+    <img src="46.jpg"/>
+   </figure>
+    <p><b>Cables de cobre: estructura de cableado horizontal y PC de escritorio en oficinas empresariales<br>
+        Fibra óptica: cableado backbone en una empresa y redes de largo alcance<br>
+        Inalámbrico: cafeterías y salas de espera de un hospital</b></p>
+</div>
+<div class="question">
+    <p>47. ¿Qué tipo de regla de comunicación sería la mejor descripción de CSMA/CD?</p>
+    <form onsubmit="return checkAnswer(event, 'q47', ['a'], 'CSMA/CD es el método de acceso utilizado en Ethernet para evitar colisiones en la red.')">
+        <label><input type="radio" name="q47" value="a"> Método de acceso</label><br>
+        <label><input type="radio" name="q47" value="b"> Encapsulamiento del mensaje</label><br>
+        <label><input type="radio" name="q47" value="c"> Control del flujo</label><br>
+        <label><input type="radio" name="q47" value="d"> Codificación del mensaje</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: El acceso múltiple por detección de portadora
+         con detección de colisiones (CSMA/CD) es el método de acceso que se utiliza
+          con Ethernet. La regla de comunicación de método de acceso determina de qué
+           forma puede un dispositivo de red ubicar una señal en la portadora. CSMA/CD 
+           determina dichas reglas en una red Ethernet, 
+        mientras que CSMA/CA lo hace en una LAN inalámbrica 802.11.</b></p>
+    <p class="result" id="result-q47"></p>
+</div>
+
+<div class="question">
+    <p>48. ¿Cuáles son las dos afirmaciones que describen las funciones o características de la subcapa de control de enlace lógico en los estándares de Ethernet? (Elija dos opciones)</p>
+    <form onsubmit="return checkAnswer(event, 'q48', ['a', 'b'], 'La subcapa LLC se encarga de la comunicación con capas superiores y se implementa mediante software.')">
+        <label><input type="checkbox" name="q48" value="a"> La capa de enlace de datos utiliza LLC para comunicarse con las capas superiores del paquete de protocolos.</label><br>
+        <label><input type="checkbox" name="q48" value="b"> El control de enlace lógico se implementa mediante software.</label><br>
+        <label><input type="checkbox" name="q48" value="c"> La subcapa LLC agrega un encabezado y un tráiler a los datos.</label><br>
+        <label><input type="checkbox" name="q48" value="d"> El control de enlace lógico está especificado en el estándar IEEE 802.3.</label><br>
+        <label><input type="checkbox" name="q48" value="e"> La subcapa LLC es responsable de la ubicación y la recuperación de tramas en los medios.</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: El control de enlace lógico se implementa en el software
+         y habilita la comunicación de la capa de enlace de datos con las capas 
+         superiores del paquete de protocolos. El control de enlace lógico está
+          especificado en el estándar IEEE 802.2. IEEE 802.3 es un conjunto de estándares
+           que definen los distintos tipos de Ethernet. La subcapa de control de acceso al
+            medio (MAC) es responsable de la ubicación y la recuperación de tramas en los 
+            medios. Esta subcapa también es responsable de agregar un encabezado y un
+         tráiler a la unidad de datos de protocolo (PDU) de la capa de red.</b></p>
+    <p class="result" id="result-q48"></p>
+</div>
+
+<div class="question">
+    <p>49. ¿Qué término de capa física OSI describe el proceso por el cual una onda modifica otra onda?</p>
+    <form onsubmit="return checkAnswer(event, 'q49', ['a'], 'La modulación es el proceso mediante el cual una señal de datos modifica una onda portadora.')">
+        <label><input type="radio" name="q49" value="a"> Modulación</label><br>
+        <label><input type="radio" name="q49" value="b"> EIA/TIA</label><br>
+        <label><input type="radio" name="q49" value="c"> Aire</label><br>
+        <label><input type="radio" name="q49" value="d"> IEEE</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p class="result" id="result-q49"></p>
+</div>
+
+<div class="question">
+    <p>50. ¿Qué acción se produciría si un host recibe una trama con una dirección MAC de destino de FF:FF:FF:FF:FF:FF?</p>
+    <form onsubmit="return checkAnswer(event, 'q50', ['d'], 'Una dirección MAC de destino FF:FF:FF:FF:FF:FF es una dirección de broadcast, por lo que el host procesará la trama.')">
+        <label><input type="radio" name="q50" value="a"> El host envía la trama al switch para actualizar la tabla de direcciones MAC.</label><br>
+        <label><input type="radio" name="q50" value="b"> El host reenvía la trama al router.</label><br>
+        <label><input type="radio" name="q50" value="c"> El host reenvía la trama a todos los demás hosts.</label><br>
+        <label><input type="radio" name="q50" value="d"> El host procesará la trama.</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p class="result" id="result-q50"></p>
+</div>
+<div class="container_volver"><a href="index.html" class="link_volver">Volver al inicio</a></div>
+</body>
+</html>

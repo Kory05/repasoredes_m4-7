@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen de Redes Parte 1</title>
+    <style>
+        body {
+            background-color: #B3E5FC; /* Azul pastel */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .question {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #0288D1;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0277BD;
+        }
+        .container_volver {
+            background-color: white;
+            padding: 10px;
+            display: inline-block;
+            border-radius: 10px;
+        }
+        .link_volver {
+            display: block;
+            margin: 5px;
+            font-size: 20px;
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .link_volver:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<script>
+    function checkAnswer(event, questionId, correctAnswers, explanation) {
+        event.preventDefault();
+        let selectedElements = document.querySelectorAll(`input[name="${questionId}"]:checked`);
+        let selectedValues = Array.from(selectedElements).map(el => el.value);
+        let resultElement = document.getElementById(`result-${questionId}`);
+        
+        if (selectedValues.length === 0) {
+            resultElement.textContent = "Por favor, selecciona una respuesta.";
+            resultElement.style.color = "red";
+            return false;
+        }
+        
+        let isCorrect = selectedValues.sort().toString() === correctAnswers.sort().toString();
+        if (isCorrect) {
+            resultElement.innerHTML = "<span style='color: green;'>¡Correcto!</span> " + explanation;
+        } else {
+            resultElement.innerHTML = "<span style='color: red;'>Incorrecto.</span> La respuesta correcta es: " + correctAnswers.join(", ") + ". " + explanation;
+        }
+        return false;
+    }
+</script>
+<h1>Módulos 4 – 7: Examen de conceptos Ethernet</h1><div class="container_volver"><a href="index.html" class="link_volver">Volver al inicio</a></div>
+<p></p>
+<div class="question">
+    <p>1. ¿Cuáles de las siguientes son dos características de un cable de fibra óptica? (Elija dos opciones)</p>
+    <form onsubmit="return checkAnswer(event, 'q1', ['a', 'c'], 'El cable de fibra óptica es más caro que el UTP y no lo afectan la EMI ni la RFI.')">
+        <label><input type="checkbox" name="q1" value="a"> Es más caro que el cable UTP.</label><br>
+        <label><input type="checkbox" name="q1" value="b"> Combina las técnicas de anulación, protección y trenzado para proteger los datos.</label><br>
+        <label><input type="checkbox" name="q1" value="c"> No lo afectan la EMI ni la RFI.</label><br>
+        <label><input type="checkbox" name="q1" value="d"> Cada par de cables se encuentra envuelto en papel metálico.</label><br>
+        <label><input type="checkbox" name="q1" value="e"> Típicamente, contiene cuatro pares de hilos de fibra óptica.</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: El cableado de fibra óptica admite un mayor ancho 
+        de banda que el UTP para distancias más grandes. La fibra 
+        es inmune a la EMI y a la RFI, pero es más costosa, es más difícil
+         de instalar y requiere más precauciones de seguridad.</b></p>
+    <p class="result" id="result-q1"></p>
+</div>
+
+<div class="question">
+    <p>2. Con el uso del cable de cobre de par trenzado sin blindaje en una red, ¿qué causa crosstalk dentro de los pares de cables?</p>
+    <form onsubmit="return checkAnswer(event, 'q2', ['b'], 'Crosstalk es causado por el campo magnético alrededor de los pares adyacentes de alambre.')">
+        <label><input type="radio" name="q2" value="a"> El uso de alambre trenzado para proteger los pares de cables adyacentes.</label><br>
+        <label><input type="radio" name="q2" value="b"> El campo magnético alrededor de los pares adyacentes de alambre.</label><br>
+        <label><input type="radio" name="q2" value="c"> La colisión causada por dos nodos que intentan usar los medios simultáneamente.</label><br>
+        <label><input type="radio" name="q2" value="d"> El reflejo de la onda eléctrica de vuelta desde el extremo lejano del cable.</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: Crosstalk es un tipo de ruido o interferencia que se produce cuando la transmisión 
+        de la señal en un cable interfiere con otro cable. Cuando la corriente
+         fluye a través de un cable, se produce un campo magnético. El campo magnético
+          producido interconectará la señal transportada en el cable adyacente.</b></p>
+    <p class="result" id="result-q2"></p>
+</div>
+
+<div class="question">
+    <p>3. ¿Qué tipo de cableado se muestra?</p>
+    <figure>
+        <img src="Captura de pantalla 2025-02-13 192317.png"/>
+    </figure>
+    <form onsubmit="return checkAnswer(event, 'q3', ['b'], 'El cable de fibra óptica es un vidrio flexible, extremadamente delgado y transparente rodeado de aislamiento de plástico.')">
+        <label><input type="radio" name="q3" value="a"> Coaxial</label><br>
+        <label><input type="radio" name="q3" value="b"> Fibra</label><br>
+        <label><input type="radio" name="q3" value="c"> UTP</label><br>
+        <label><input type="radio" name="q3" value="d"> STP</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: El cableado de red incluye diferentes tipos de cables:
+        Consta de cuatro pares de hilos codificados por colores que están trenzados
+         entre sí y recubiertos con un revestimiento de plástico flexible.
+        STP utiliza cuatro pares de hilos. Cada uno de estos pares está 
+        empaquetado primero con un blindaje de hoja metálica y, luego, el conjunto se 
+        empaqueta con una malla tejida o una hoja metálica.
+        El cable coaxial utiliza un conductor de cobre y una capa de 
+        aislamiento plástico flexible rodea el conductor de cobre.
+        El cable de fibra es una un vidrio flexible, extremadamente delgado y transparente 
+        rodeada de aislamiento de plástico.</b></p>
+    <p class="result" id="result-q3"></p>
+</div>
+
+<div class="question">
+    <p>4. Además de la longitud del cable, ¿cuáles son los otros dos factores que podrían interferir en la comunicación por cables UTP? (Elija dos opciones)</p>
+    <form onsubmit="return checkAnswer(event, 'q4', ['a', 'd'], 'Los medios de cobre están limitados por la distancia y la interferencia de señal, causada por EMI/RFI y el crosstalk.')">
+        <label><input type="checkbox" name="q4" value="a"> Interferencia electromagnética</label><br>
+        <label><input type="checkbox" name="q4" value="b"> Tamaño de la red</label><br>
+        <label><input type="checkbox" name="q4" value="c"> Ancho de banda</label><br>
+        <label><input type="checkbox" name="q4" value="d"> Crosstalk</label><br>
+        <label><input type="checkbox" name="q4" value="e"> Técnica de modulación de señal</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: Los medios de cobre se utilizan de manera extensiva en las comunicaciones de red. Sin embargo, estos medios están limitados por la distancia y la interferencia de señal. Los datos se transmiten por cables de cobre como impulsos eléctricos, que son susceptibles a la interferencia de dos orígenes:
+        Interferencia electromagnética (EMI) o interferencia de radiofrecuencia (RFI): las señales de EMI y RFI pueden distorsionar y dañar las señales de datos que transportan los medios de cobre.
+        Crosstalk: se trata de una perturbación causada por los campos eléctricos o magnéticos de una señal de un hilo a la señal de un hilo adyacente.</b></p>
+    <p class="result" id="result-q4"></p>
+</div>
+
+<div class="question">
+    <p>5. ¿Qué tipo de cableado se muestra?</p>
+    <figure>
+        <img src="utp.png"/>
+    </figure>
+    <form onsubmit="return checkAnswer(event, 'q5', ['c'], 'El cable UTP consta de cuatro pares de hilos codificados por colores que están trenzados entre sí y recubiertos con un revestimiento de plástico flexible.')">
+        <label><input type="radio" name="q5" value="a"> Fibra</label><br>
+        <label><input type="radio" name="q5" value="b"> Coaxial</label><br>
+        <label><input type="radio" name="q5" value="c"> UTP</label><br>
+        <label><input type="radio" name="q5" value="d"> STP</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: El cableado de red incluye diferentes tipos de cables:
+        UTP Consta de cuatro pares de hilos codificados por colores que están trenzados entre sí y recubiertos con un revestimiento de plástico flexible.
+        STP utiliza cuatro pares de hilos. Cada uno de estos pares está empaquetado primero con un blindaje de hoja metálica y, luego, el conjunto se empaqueta con una malla tejida o una hoja metálica.
+        El cable coaxial utiliza un conductor de cobre y una capa de aislamiento plástico flexible rodea el conductor de cobre.
+        El cable de fibra es un vidrio flexible, extremadamente delgado y transparente rodeada de aislamiento de plástico.</b></p>
+    <p class="result" id="result-q5"></p>
+</div>
+<div class="question">
+    <p>6. ¿Cuáles son los dos dispositivos que comúnmente afectan las redes inalámbricas? (Elija dos opciones)</p>
+    <form onsubmit="return checkAnswer(event, 'q6', ['c', 'e'], 'La interferencia de radiofrecuencia (RFI) es causada por transmisores de radio y otros dispositivos que operan en la misma frecuencia.')">
+        <label><input type="checkbox" name="q6" value="a"> Lámparas incandescentes</label><br>
+        <label><input type="checkbox" name="q6" value="b"> Centros de entretenimiento</label><br>
+        <label><input type="checkbox" name="q6" value="c"> Microondas</label><br>
+        <label><input type="checkbox" name="q6" value="d"> Discos duros externos</label><br>
+        <label><input type="checkbox" name="q6" value="e"> Teléfonos inalámbricos</label><br>
+        <label><input type="checkbox" name="q6" value="f"> Reproductores de Blu-ray</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: La interferencia de radiofrecuencia (RFI, Radio Frequency Interference)
+         es la interferencia causada por los trasmisores de radio y otros 
+        dispositivos que transmiten la misma frecuencia.</b></p>
+    <p class="result" id="result-q6"></p>
+</div>
+
+<div class="question">
+    <p>7. ¿Cuáles dos instrucciones describen los servicios proporcionados por la capa de enlace de datos? (Escoja dos opciones)</p>
+    <form onsubmit="return checkAnswer(event, 'q7', ['b', 'f'], 'La capa de enlace de datos gestiona el acceso a los medios y empaqueta PDU de capa 3 en tramas adecuadas para la transmisión.')">
+        <label><input type="checkbox" name="q7" value="a"> Define el esquema de direccionamiento de entrega de extremo a extremo.</label><br>
+        <label><input type="checkbox" name="q7" value="b"> Gestiona el acceso de tramas a los medios de red.</label><br>
+        <label><input type="checkbox" name="q7" value="c"> Mantiene la ruta entre los dispositivos de origen y destino durante la transmisión de datos.</label><br>
+        <label><input type="checkbox" name="q7" value="d"> Garantiza que los datos de la aplicación se transmitan de acuerdo con la priorización.</label><br>
+        <label><input type="checkbox" name="q7" value="e"> Proporciona una entrega fiable a través del establecimiento de enlaces y el control de flujo.</label><br>
+        <label><input type="checkbox" name="q7" value="f"> Empaque varias PDU de capa 3 en un formato de trama compatible con la interfaz de red.</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: La capa de enlace de datos del modelo
+         OSI se divide en dos subcapas: la subcapa de control de
+          acceso al medio (MAC) y la subcapa de control de enlace 
+          lógico (LLC). LLC forma una trama de la PDU de capa de red en 
+          un formato que se ajusta a los requisitos de la interfaz de red y 
+          los medios. Una PDU de capa de red puede ser para IPv4 o IPv6. La sub-capa
+           MAC he MAC define los procesos de acceso al medio que realiza el hardware. Gestiona
+            el acceso de trama a los medios de red de acuerdo con los requisitos de señalización física
+             (cable de cobre, fibra óptica, inalámbrica, etc.)</b></p>
+    <p class="result" id="result-q7"></p>
+</div>
+
+<div class="question">
+    <p>8. ¿Cuál es la función del valor CRC que se encuentra en el campo FCS de una trama?</p>
+    <form onsubmit="return checkAnswer(event, 'q8', ['b'], 'El valor CRC se usa para verificar la integridad de la trama recibida, descartándola si no coincide.')">
+        <label><input type="radio" name="q8" value="a"> Verificar la dirección física que se encuentra en la trama.</label><br>
+        <label><input type="radio" name="q8" value="b"> Verificar la integridad de la trama recibida.</label><br>
+        <label><input type="radio" name="q8" value="c"> Calcular el encabezado checksum para el campo de datos de la trama.</label><br>
+        <label><input type="radio" name="q8" value="d"> Verificar la dirección lógica que se encuentra en la trama.</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: El valor CRC del campo FCS de la trama recibida se compara con el valor
+         CRC calculado para verificar la integridad
+         de dicha trama. Si los dos valores no coinciden, se descarta la trama.</b></p>
+    <p class="result" id="result-q8"></p>
+</div>
+
+<div class="question">
+    <p>9. ¿Qué contiene el tráiler de una trama de enlace de datos?</p>
+    <form onsubmit="return checkAnswer(event, 'q9', ['b'], 'El tráiler de una trama contiene la información de detección de errores en el campo FCS.')">
+        <label><input type="radio" name="q9" value="a"> DATA</label><br>
+        <label><input type="radio" name="q9" value="b"> Detección de errores</label><br>
+        <label><input type="radio" name="q9" value="c"> Dirección lógica</label><br>
+        <label><input type="radio" name="q9" value="d"> Dirección física</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: El tráiler de una trama de enlace de datos contiene 
+        la información de detección de errores pertinente a la trama incluida 
+        en el campo FCS. El encabezado contiene información de control, como el direccionamiento,
+         mientras que el área que indica la palabra “data” (datos) incluye los datos, la PDU de la capa 
+         de transporte y el encabezado IP.</b></p>
+    <p class="result" id="result-q9"></p>
+</div>
+
+<div class="question">
+    <p>10. ¿Cuál de estas afirmaciones describe una característica de los campos de encabezado de la trama de la capa de enlace de datos?</p>
+    <form onsubmit="return checkAnswer(event, 'q10', ['c'], 'Los encabezados de tramas de capa de enlace varían según los protocolos utilizados.')">
+        <label><input type="radio" name="q10" value="a"> Los campos de encabezado de la trama de Ethernet contienen las direcciones de origen y destino de la capa 3.</label><br>
+        <label><input type="radio" name="q10" value="b"> Incluyen información sobre las aplicaciones de usuario.</label><br>
+        <label><input type="radio" name="q10" value="c"> Varían según los protocolos.</label><br>
+        <label><input type="radio" name="q10" value="d"> Todos incluyen los campos de control del flujo y de conexión lógica.</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: Todos los protocolos de capa de enlace de datos encapsulan 
+        la PDU de la capa 3 dentro del campo de datos de la trama. 
+        Sin embargo, la estructura de la trama y los campos contenidos en 
+        el encabezado varían de acuerdo con el protocolo. Los distintos protocolos 
+        de capa de enlace de datos pueden utilizar campos distintos, como prioridad/calidad
+         de servicio, control de conexión lógica, control de enlace físico, control del flujo y 
+         control de congestión.</b></p>
+    <p class="result" id="result-q10"></p>
+</div>
+<div class="container_volver"><a href="index.html" class="link_volver">Volver al inicio</a></div>
+</body>

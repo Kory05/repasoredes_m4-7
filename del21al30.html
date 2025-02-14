@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen de Redes - Parte 3</title>
+    <style>
+        body {
+            background-color: #F8BBD0; /* Rosa pastel */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .question {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #D81B60;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #C2185B;
+        }
+        .container_volver {
+            background-color: white;
+            padding: 10px;
+            display: inline-block;
+            border-radius: 10px;
+        }
+        .link_volver {
+            display: block;
+            margin: 5px;
+            font-size: 20px;
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .link_volver:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<script>
+    function checkAnswer(event, questionId, correctAnswers, explanation) {
+        event.preventDefault();
+        let selectedElements = document.querySelectorAll(`input[name="${questionId}"]:checked`);
+        let selectedValues = Array.from(selectedElements).map(el => el.value);
+        let resultElement = document.getElementById(`result-${questionId}`);
+        
+        if (selectedValues.length === 0) {
+            resultElement.textContent = "Por favor, selecciona una respuesta.";
+            resultElement.style.color = "red";
+            return false;
+        }
+        
+        let isCorrect = selectedValues.sort().toString() === correctAnswers.sort().toString();
+        if (isCorrect) {
+            resultElement.innerHTML = "<span style='color: green;'>¡Correcto!</span> " + explanation;
+        } else {
+            resultElement.innerHTML = "<span style='color: red;'>Incorrecto.</span> La respuesta correcta es: " + correctAnswers.join(", ") + ". " + explanation;
+        }
+        return false;
+    }
+</script>
+<h1>Módulos 4 – 7: Examen de conceptos Ethernet - Parte 3</h1><div class="container_volver"><a href="index.html" class="link_volver">Volver al inicio</a></div>
+<p></p>
+<div class="question">
+    <p>21. Un administrador de red conecta
+         dos switches modernos mediante un cable de conexión directa. 
+        Los switches son nuevos y nunca se configuraron. 
+         ¿Cuáles son las tres afirmaciones correctas sobre la conexión
+          entre dos switches modernos con un cable directo? (Elija tres).</p>
+    <form onsubmit="return checkAnswer(event, 'q21', ['b', 'c', 'e'], 'Los switches modernos pueden negociar el modo full-duplex y la velocidad óptima, además de configurar automáticamente el cableado con Auto-MDIX.')">
+        <label><input type="checkbox" name="q21" value="a"> La conexión no será posible a menos que se use un cable cruzado.</label><br>
+        <label><input type="checkbox" name="q21" value="b"> El enlace entre los switches funcionará como full-duplex.</label><br>
+        <label><input type="checkbox" name="q21" value="c"> El enlace entre los switches funcionará a la máxima velocidad que admitan ambos switches.</label><br>
+        <label><input type="checkbox" name="q21" value="d"> Cada switch funcionará a su propia velocidad máxima sin sincronización.</label><br>
+        <label><input type="checkbox" name="q21" value="e"> La característica MDIX automática configurará las interfaces sin necesidad de un cable cruzado.</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: Los switches modernos pueden negociar el funcionamiento 
+        en modo full-duplex si ambos switches tienen esa capacidad. Negocian 
+        funcionar con la velocidad más alta posible, y la característica MDIX
+         automática está habilitada
+         de manera predeterminada, por lo que no es necesario un cambio de cable.</b></p>
+    <p class="result" id="result-q21"></p>
+</div>
+
+<div class="question">
+    <p>22. ¿Qué ventaja posee el método de switching de almacenamiento y reenvío en comparación con el método de switching por método de corte?</p>
+    <form onsubmit="return checkAnswer(event, 'q22', ['d'], 'El switching de almacenamiento y reenvío verifica errores en la trama antes de reenviarla.')">
+        <label><input type="radio" name="q22" value="a"> Reenvío de tramas más rápido</label><br>
+        <label><input type="radio" name="q22" value="b"> Reenvío de tramas utilizando la información de IPv4 de capa 3 y 4</label><br>
+        <label><input type="radio" name="q22" value="c"> Detección de colisión</label><br>
+        <label><input type="radio" name="q22" value="d"> Verificación de errores de la trama</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: Un switch que utiliza el método de switching 
+        de almacenamiento y reenvío realiza una verificación de errores
+         en una trama entrante comparando el valor de FCS con sus propios 
+         cálculos de FCS después de recibir la trama completa. En comparación, 
+         un switch que usa el switching por método de corte toma rápidas decisiones
+          de reenvío e inicia el proceso de reenvío sin esperar la recepción de la trama 
+          completa. Por ende, un switch que usa el switching por método de corte puede enviar 
+          tramas no válidas a la red. El rendimiento del switching de almacenamiento y envío es 
+          más lento en comparación con el rendimiento del switching por método de corte. El dispositivo
+           emisor controla la detección de colisiones. El switching de almacenamiento y reenvío no utiliza 
+        la información de IPv4 de capa 3 y 4 para sus decisiones de reenvío.</b></p>
+    <p class="result" id="result-q22"></p>
+</div>
+
+<div class="question">
+    <p>23. ¿Cuál de los siguientes métodos de switching utiliza el valor CRC de una trama?</p>
+    <form onsubmit="return checkAnswer(event, 'q23', ['a'], 'El método de almacenamiento y envío usa el CRC del tráiler para verificar si la trama se modificó durante el tránsito.')">
+        <label><input type="radio" name="q23" value="a"> Almacenamiento y envío</label><br>
+        <label><input type="radio" name="q23" value="b"> Envío rápido</label><br>
+        <label><input type="radio" name="q23" value="c"> Libre de fragmentos</label><br>
+        <label><input type="radio" name="q23" value="d"> Método de corte</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: Cuando se utiliza el método de switching de almacenamiento y envío, el
+         switch recibe la trama completa antes de reenviarla al destino. La porción de 
+         comprobación cíclica de redundancia (CRC) del tráiler se utiliza para determinar si 
+         la trama se modificó durante el tránsito. En cambio, un switch por método de corte reenvía
+          la trama una vez que se lee la dirección de capa 2 de destino. Dos tipos de switching por
+           método de corte son el método de envío rápido y el método libre de fragmentos.
+    </b></p>
+    <p class="result" id="result-q23"></p>
+</div>
+
+<div class="question">
+    <p>24. ¿Cuáles de las siguientes son dos acciones que realiza un switch Cisco? (Elija dos opciones).</p>
+    <form onsubmit="return checkAnswer(event, 'q24', ['a', 'd'], 'Los switches usan direcciones MAC para reenviar tramas y construir su tabla de direcciones MAC.')">
+        <label><input type="checkbox" name="q24" value="a"> Uso de la tabla de direcciones MAC para enviar tramas por medio de la dirección MAC de destino</label><br>
+        <label><input type="checkbox" name="q24" value="b"> Reenvío de tramas con direcciones IP de destino desconocidas al gateway predeterminado</label><br>
+        <label><input type="checkbox" name="q24" value="c"> Armado de una tabla de routing basada en la primera dirección IP en el encabezado de la trama</label><br>
+        <label><input type="checkbox" name="q24" value="d"> Uso de la dirección MAC de origen de las tramas para armar y mantener una tabla de direcciones MAC</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: Las acciones importantes que realiza un switch son las siguientes:
+        Cuando llega una trama, el switch examina la dirección de origen de capa 
+        2 para armar y mantener la tabla de direcciones MAC de capa 2.
+        Examina la dirección de destino de capa 2 para determinar cómo reenviar la trama. 
+        Cuando la dirección de destino se encuentra en la tabla de direcciones MAC, la trama 
+        se envía por un puerto específico. Cuando la dirección es desconocida, la trama se envía a 
+        todos los puertos 
+        que tienen dispositivos conectados a esa red.</b></p>
+    <p class="result" id="result-q24"></p>
+</div>
+
+<div class="question">
+    <p>25. ¿Qué es la función Auto-MDIX?</p>
+    <form onsubmit="return checkAnswer(event, 'q25', ['a'], 'Auto-MDIX configura automáticamente los puertos de red para adaptarse a cables directos o cruzados.')">
+        <label><input type="radio" name="q25" value="a"> Permite a un dispositivo configurar automáticamente una interfaz para utilizar un cable directo o cruzado.</label><br>
+        <label><input type="radio" name="q25" value="b"> Permite que un dispositivo configure automáticamente la velocidad de su interfaz.</label><br>
+        <label><input type="radio" name="q25" value="c"> Permite a un switch seleccionar dinámicamente el método de reenvío.</label><br>
+        <label><input type="radio" name="q25" value="d"> Permite a un dispositivo configurar automáticamente los ajustes dúplex de un segmento.</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: La función Auto-MDIX permite al dispositivo configurar 
+        su puerto de red de acuerdo con el tipo de cable que se utiliza (directo o cruzado) 
+        y el tipo de dispositivo que está conectado a ese puerto.Cuando un puerto de un switch
+         está configurado con Auto-MDIX, este switch se puede conectar a otro switch mediante
+         el uso de un cable directo o un cable cruzado.</b></p>
+    <p class="result" id="result-q25"></p>
+</div>
+<div class="question">
+    <p>26. ¿Cuál es una dirección MAC multicast?</p>
+    <form onsubmit="return checkAnswer(event, 'q26', ['d'], 'Las direcciones MAC multicast comienzan con el valor especial 01-00-5E.')">
+        <label><input type="radio" name="q26" value="a"> FF-FF-FF-FF-FF-FF</label><br>
+        <label><input type="radio" name="q26" value="b"> 5C-26-0A-4B-19-3E</label><br>
+        <label><input type="radio" name="q26" value="c"> 00-26-0F-4B-00-3E</label><br>
+        <label><input type="radio" name="q26" value="d"> 01-00-5E-00-00-03</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: Las direcciones MAC multicast comienzan con el valor especial 01-00-5E.</b></p>
+    <p class="result" id="result-q26"></p>
+</div>
+
+<div class="question">
+    <p>27. Consulte la ilustración. ¿Cuál es el problema con la terminación que se muestra?</p>
+    <figure>
+        <img src="27.jpg" alt="Conector RJ-45 mal terminado"/>
+    </figure>
+    <form onsubmit="return checkAnswer(event, 'q27', ['c'], 'La parte sin trenzar de cada cable es demasiado larga, lo que puede afectar la señal.')">
+        <label><input type="radio" name="q27" value="a"> No se debería haber quitado la malla de cobre tejida.</label><br>
+        <label><input type="radio" name="q27" value="b"> Se está utilizando el tipo de conector incorrecto.</label><br>
+        <label><input type="radio" name="q27" value="c"> La longitud de la parte sin trenzar de cada cable es demasiado larga.</label><br>
+        <label><input type="radio" name="q27" value="d"> Los cables son demasiado gruesos para el conector que se utiliza.</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: uando se realiza la terminación de un cable con un conector
+         RJ-45, es importante asegurar que los cables sin trenzar no sean demasiado largos
+          y que el revestimiento de plástico flexible que rodea los cables esté engarzado, es decir,
+           que no haya hilos desnudos. No se debe ver
+         ninguno de los cables de color desde la base del conector.</b></p>
+    <p class="result" id="result-q27"></p>
+</div>
+
+<div class="question">
+    <p>28. Consulte la ilustración. La PC está conectada al puerto de consola del switch. 
+        Todas las demás conexiones se realizan con enlaces FastEthernet. 
+        ¿Qué tipos de cables UTP se pueden utilizar para conectar los dispositivos?</p>
+        <figure>
+            <img src="28.jpg"/>
+        </figure>
+    <form onsubmit="return checkAnswer(event, 'q28', ['d'], 'El cable de consola (rollover) se usa para conectar la PC al switch, los cables directos y cruzados se utilizan según los dispositivos conectados.')">
+        <label><input type="radio" name="q28" value="a"> 1: cruzado; 2: directo; 3: de consola (rollover)</label><br>
+        <label><input type="radio" name="q28" value="b"> 1: de consola (rollover); 2: cruzado; 3: directo</label><br>
+        <label><input type="radio" name="q28" value="c"> 1: cruzado; 2: de consola (rollover); 3: directo</label><br>
+        <label><input type="radio" name="q28" value="d"> 1: de consola (rollover); 2: directo; 3: cruzado</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: Por lo general, se utiliza un cable directo para interconectar
+         un host con un switch y un switch con un router. Los cables cruzados se utilizan para 
+         interconectar dispositivos similares, como un switch con un switch, un host con un host 
+         o un router con un router. Si un switch tuviera funcionalidad MDIX, se podría utilizar un 
+         cable cruzado para conectar el switch al router; sin embargo, esa opción no está disponible. 
+         Los cables de consola (rollover)
+         se utilizan para conectarse al puerto de consola de un router o de un switch.</b></p>
+    <p class="result" id="result-q28"></p>
+</div>
+
+<div class="question">
+    <p>29. ¿Cuál puerto es usado cuando Switch0 envía tramas a un host con la dirección IPv4?</p>
+    <figure>
+        <img src="29.jpg"/>
+    </figure>
+    <form onsubmit="return checkAnswer(event, 'q29', ['d'], 'El switch usa la tabla de direcciones MAC para determinar el puerto de salida.')">
+        <label><input type="radio" name="q29" value="a"> Fa0/1</label><br>
+        <label><input type="radio" name="q29" value="b"> Fa0/5</label><br>
+        <label><input type="radio" name="q29" value="c"> Fa0/9</label><br>
+        <label><input type="radio" name="q29" value="d"> Fa0/11</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: La ejecución del comando i pconfig /all desde el símbolo del 
+        sistema PC0 muestra la dirección IPv4 y la dirección MAC. Cuando se hace ping a
+         la dirección IPv4 10.1.1.5 desde PC0, el switch almacena la dirección MAC de origen 
+         (desde PC0) junto con el puerto al que está conectado PC0. Cuando se recibe la respuesta
+          de destino, el switch toma la dirección MAC de destino y compara con las direcciones MAC 
+          almacenadas en la tabla de direcciones MAC. La ejecucion comando show mac-address-table en
+           la aplicación Terminal de PC0 muestra dos entradas dinámicas de direcciones MAC. La dirección
+            MAC y la entrada de puerto que no pertenecen a PC0 deben ser la dirección MAC y
+         el puerto del destino con la dirección IPv4 10.1.1.5.</b></p>
+    <p class="result" id="result-q29"></p>
+</div>
+<div class="question">
+    <p>30. ¿Qué significa el término «atenuación» en la comunicación de datos?</p>
+    <form onsubmit="return checkAnswer(event, 'q30', ['b'], 'La atenuación es la pérdida de intensidad de la señal a medida que aumenta la distancia.')">
+        <label><input type="radio" name="q30" value="a"> Fuga de señales de un par de cables a otro</label><br>
+        <label><input type="radio" name="q30" value="b"> Pérdida de intensidad de la señal a medida que aumenta la distancia</label><br>
+        <label><input type="radio" name="q30" value="c"> Fortalecimiento de una señal mediante un dispositivo de red</label><br>
+        <label><input type="radio" name="q30" value="d"> Tiempo para que una señal llegue a su destino</label><br>
+        <button type="submit">Verificar</button>
+    </form>
+    <p><b>Explique: Los datos se transmiten en cables de cobre como
+         impulsos eléctricos. Un detector en la interfaz de red de un
+          dispositivo de destino debe recibir una señal que pueda decodificarse
+           exitosamente para que coincida con la señal enviada. No obstante, cuanto
+            más lejos viaja una señal, más se deteriora.
+         Esto se denomina atenuación de señal.</b></p>
+    <p class="result" id="result-q30"></p>
+</div>
+<div class="container_volver"><a href="index.html" class="link_volver">Volver al inicio</a></div>
+</body>
+</html>
